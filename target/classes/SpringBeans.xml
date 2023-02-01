@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:annotation-config />
+
+	<!-- Scans the classpath of this application for @Components to deploy as 
+		beans -->
+	<context:component-scan base-package="com.inventario" />
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver"
+		p:order="1" />
+
+	<!-- Beans Declaration <bean id="clienteBean" class="com.pizza.mngbeans.ClienteBean" 
+		/> <bean id="productoBean" class="com.pizza.mngbeans.ProductoBean" /> <bean 
+		id="consultasBean" class="com.pizza.mngbeans.ConsultasBean" /> <bean id="clienteService" 
+		class="com.pizza.service.ClienteServiceImpl" /> <bean id="productoService" 
+		class="com.pizza.service.ProductoServiceImpl" /> <bean id="consultasService" 
+		class="com.pizza.service.ConsultasServiceImpl" /> <bean id="sucursalService" 
+		class="com.pizza.service.SucursalServiceImpl" /> <bean id="grupoService" 
+		class="com.pizza.service.GrupoServiceImpl" /> <bean id="ingredienteService" 
+		class="com.pizza.service.IngredienteServiceImpl" /> <bean id="tamanoService" 
+		class="com.pizza.service.TamanoServiceImpl" /> <bean id="clasificacionService" 
+		class="com.pizza.service.ClasificacionServiceImpl" /> <bean id="categoriaService" 
+		class="com.pizza.service.CategoriaServiceImpl" /> <bean id="tamanoDao" class="com.pizza.dao.TamanoDaoImpl"/> 
+		<bean id="ingredienteDao" class="com.pizza.dao.IngredienteDaoImpl"/> <bean 
+		id="grupoDao" class="com.pizza.dao.GrupoDaoImpl"/> <bean id="direccionDao" 
+		class="com.pizza.dao.DireccionDaoImpl"/> <bean id="clienteDao" class="com.pizza.dao.ClienteDaoImpl"/> 
+		<bean id="productoDao" class="com.pizza.dao.ProductoDaoImpl"/> <bean id="consultasDao" 
+		class="com.pizza.dao.ConsultasDaoImpl"/> <bean id="sucursalDao" class="com.pizza.dao.SucursalDaoImpl"/> 
+		<bean id="clasificacionDao" class="com.pizza.dao.ClasificacionDaoImpl"/> 
+		<bean id="categoriaDao" class="com.pizza.dao.CategoriaDaoImpl"/> -->
+
+	<bean id="usuarioService" class="com.inventario.service.UsuarioServiceImpl" />
+	<bean id="soService" class="com.inventario.service.SoServiceImpl" />
+	<bean id="paqueteriaService" class="com.inventario.service.PaqueteriaServiceImpl" />
+	<bean id="movimientosService" class="com.inventario.service.MovimientosServiceImpl" />
+	<bean id="personalService" class="com.inventario.service.PersonalServiceImpl" />
+	<bean id="equipoService" class="com.inventario.service.EquipoServiceImpl" />
+	<bean id="impresoraService" class="com.inventario.service.ImpresoraServiceImpl" />
+	<bean id="escanerService" class="com.inventario.service.EscanerServiceImpl" />
+	<bean id="mouseService" class="com.inventario.service.MouseServiceImpl" />
+
+	<bean id="usuarioDao" class="com.inventario.dao.UsuarioDaoImpl" />
+	<bean id="soDao" class="com.inventario.dao.SoDaoImpl" />
+	<bean id="paqueteriaDao" class="com.inventario.dao.PaqueteriaDaoImpl" />
+	<bean id="movimientosDao" class="com.inventario.dao.MovimientosDaoImpl" />
+	<bean id="personalDao" class="com.inventario.dao.PersonalDaoImpl" />
+	<bean id="equipoDao" class="com.inventario.dao.EquipoDaoImpl" />
+	<bean id="impresoraDao" class="com.inventario.dao.ImpresoraDaoImpl" />
+	<bean id="escanerDao" class="com.inventario.dao.EscanerDaoImpl" />
+	<bean id="mouseDao" class="com.inventario.dao.MouseDaoImpl" />
+	
+</beans>

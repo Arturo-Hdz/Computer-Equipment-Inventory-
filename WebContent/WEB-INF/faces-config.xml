@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+
+	<application>
+		<variable-resolver>
+			org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>userManagedBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.UserManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>usuarioService</property-name>
+			<value>#{usuarioService}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>soBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.SoBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>SoService</property-name>
+			<value>#{soService}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>paqueteriaBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.PaqueteriaBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>PaqueteriaService</property-name>
+			<value>#{paqueteriaService}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>movimientosBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.MovimientosBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>MovimientosService</property-name>
+			<value>#{movimientosService}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>personalBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.PersonalBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>PersonalService</property-name>
+			<value>#{personalService}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>equipoBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.EquipoBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>EquipoService</property-name>
+			<value>#{equipoService}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>impresoraBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.ImpresoraBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>ImpresoraService</property-name>
+			<value>#{impresoraService}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>escanerBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.EscanerBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>EscanerService</property-name>
+			<value>#{escanerService}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>mouseBean</managed-bean-name>
+		<managed-bean-class>com.inventario.mngbeans.MouseBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>MouseService</property-name>
+			<value>#{mouseService}</value>
+		</managed-property>
+	</managed-bean>
+	
+</faces-config>

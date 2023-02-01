@@ -1,0 +1,403 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<input type="hidden" id="usuario" name="usuario"
+			value="#{userManagedBean.usuario.id}" />
+
+		<title>Movimientos Equipos | INVISIS</title>
+		<center>
+
+			<script>
+				function conMayusculas(field) {
+					field.value = field.value.toUpperCase()
+				}
+			</script>
+
+			<h:form id="form3">
+					<p:megaMenu style="margin-top:20px">
+					<p:menuitem value="Inicio" url="/views/home.jsf"
+						icon="ui-icon-home" />
+
+					<p:submenu label="Equipo" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo">
+								<p:menuitem value="Equipo"
+									actionListener="#{equipoBean.llenaEquipo}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo3}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo1}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo2}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo4}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo5}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo6}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Traspasos" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Traspasos">
+								<p:menuitem value="Movimientos Equipos"
+									actionListener="#{equipoBean.llenaEquipo7}"
+									update=":tabla:tablaequipos" ajax="false" />
+								<p:menuitem value="Historial de Movimientos"
+									actionListener="#{movimientosBean.llenaMovimientos}"
+									update=":tabla:tablamov" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Mantenimiento" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo Mantenimiento">
+								<p:menuitem value="Mantenimiento"
+									actionListener="#{paqueteriaBean.llenaTm}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Reporte Equipo Mantenimiento Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm3}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm1}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm2}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Mantenimiento Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm6}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm4}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm5}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Clasificación" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Clasificación">
+								<p:menuitem value="Monitor"
+									actionListener="#{mouseBean.llenaMon}" update=":tabla:tablamon"
+									ajax="false" />
+								<p:menuitem value="Mouse"
+									actionListener="#{mouseBean.llenaMouse}"
+									update=":tabla:tablamou" ajax="false" />
+								<p:menuitem value="Teclado"
+									actionListener="#{impresoraBean.llenaTecla}"
+									update=":tabla:tablatecla" ajax="false" />
+								<p:menuitem value="No break"
+									actionListener="#{escanerBean.llenaNob}"
+									update=":tabla:tablanob" ajax="false" />
+								<p:menuitem value="Escáner"
+									actionListener="#{escanerBean.llenaEsca}"
+									update=":tabla:tablaesca" ajax="false" />
+								<p:menuitem value="Impresora"
+									actionListener="#{impresoraBean.llenaImpre}"
+									update=":tabla:tablaimpre" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Catálogos" icon="ui-icon-pencil">
+						<p:column>
+							<p:submenu label="Marca">
+								<p:menuitem value="Fabricante"
+									actionListener="#{userManagedBean.llenafabricante}"
+									update=":tabla:tablafabricantes" ajax="false" />
+								<p:menuitem value="Sistema Operativo"
+									actionListener="#{soBean.llenaSo}" update=":tabla:tablaso"
+									ajax="false" />
+								<p:menuitem value="Paquetería"
+									actionListener="#{paqueteriaBean.llenaPq}"
+									update=":tabla:tablapaq" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Areas">
+								<p:menuitem value="Área"
+									actionListener="#{movimientosBean.llenaArea}"
+									update=":tabla:tablaareas" ajax="false" />
+								<p:menuitem value="Departamento"
+									actionListener="#{movimientosBean.llenaDepa}"
+									update=":tabla:tabladepas" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Usuarios">
+								<p:menuitem value="Personal"
+									actionListener="#{personalBean.llenaPersonal}"
+									update=":tabla:tablaperson" ajax="false" />
+								<p:menuitem value="Usuarios"
+									actionListener="#{userManagedBean.llenausuario}"
+									update=":tabla:tablausuarios" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+					<p:menuitem value="Logout" url="/default.jsf"
+						icon="ui-icon-close" />
+
+				</p:megaMenu>
+			</h:form>
+
+			<p:panel id="panel" header="Bienvenido #{userManagedBean.username}!"
+				heigth="100%">
+				<BR></BR>
+
+				<h:form id="form">
+
+					<p:growl id="messages" showDetail="true" />
+
+					<p:commandButton id="btn" value="Actualizar"
+						update=":tabla:tablaequipos" ajax="false"
+						action="#{equipoBean.llenaEquipo7}" />
+
+					<p:dataTable id="tablaequipos" var="equipo"
+						value="#{equipoBean.listaequipo}" scrollable="true"
+						scrollWidth="97%" resizableColumns="true" liveResize="true"
+						editable="true" widgetVar="eqTable" selectionMode="single"
+						rowKey="#{equipo.id_equipo}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+						{PageLinks} {NextPageLink} {LastPageLink}
+						{RowsPerPageDropdown} {Exporters}"
+						rowsPerPageTemplate="5,10,20" paginator="true" rows="20"
+						style="margin-bottom:20px">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink ajax="false">
+								<p:graphicImage value="/images/pdf.png" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="pdf" target="tablaequipos"
+									fileName="#{equipoBean.fileName}" pageOnly="false"
+									selectionOnly="true" preProcessor="#{equipoBean.preProcessPDF}"
+									postProcessor="#{equipoBean.postProcessPDF}" />
+							</h:commandLink>
+
+							<h:commandLink ajax="false">
+								<p:graphicImage value="/images/excel.jpg" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="xls" target="tablaequipos"
+									fileName="#{equipoBean.fileName}" pageOnly="false"
+									selectionOnly="true"
+									postProcessor="#{equipoBean.postProcessXLS}" />
+							</h:commandLink>
+
+						</f:facet>
+
+						<f:facet name="header">Reporte Movimientos Equipos</f:facet>
+
+						<p:contextMenu for="listaequipo" widgetVar="cMenu">
+							<p:menuitem value="Edit Cell" icon="ui-icon-search"
+								onclick="eqTable.showCellEditor();return false;" />
+							<p:menuitem value="Hide Menu" icon="ui-icon-close"
+								onclick="cMenu.hide()" />
+						</p:contextMenu>
+
+						<p:ajax event="rowEdit" listener="#{equipoBean.onRowEditEquipo}"
+							update=":form:messages" />
+						<p:ajax event="rowEditCancel" listener="#{equipoBean.onRowCancel}"
+							update=":form:messages" />
+						
+						<p:column headerText="Id" style="width:25%">
+								<f:facet name="output" />
+									<h:outputText value="#{equipo.id_equipo}" />
+								<f:facet name="input">
+									<p:inputText type="hidden"
+									value="#{equipoBean.id_equipo}" />
+								</f:facet>
+						</p:column>
+
+						<p:column filterBy="#{equipo.no_serie}" headerText="No. Serie"
+							footerText="No. Serie" filterMatchMode="contains"
+							style="width:15%">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.no_serie}" />
+						</p:column>
+
+						<p:column headerText="Modelo" style="width:15%">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.modelo}" />
+						</p:column>
+
+						<p:column headerText="Fecha" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{equipo.fecha}">
+										<f:convertDateTime pattern="yyyy-MMM-d a" />
+									</h:outputText>
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar id="fecha" value="#{equipoBean.fecha1}"
+										actionListener="#{equipoBean.click}"
+										pattern="dd-MM-yyyy HH:mm:ss a" mask="true" />
+									<p:tooltip id="toolTipFade" for="fecha"
+										value="Anota la Fecha Actual del Movimiento" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Fabricante" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.fabricante.fabricante}" />
+						</p:column>
+
+						<p:column headerText="Monitor" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.monitor.serie}" />
+						</p:column>
+
+						<p:column headerText="Mouse" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.mouse.serie}" />
+						</p:column>
+
+						<p:column headerText="Teclado" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.teclado.serie}" />
+						</p:column>
+
+						<p:column headerText="Nobreak" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.nobreak.serie}" />
+						</p:column>
+
+						<p:column headerText="Escáner" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.scanner.serie}" />
+						</p:column>
+
+						<p:column headerText="Impresora" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.impresora.serie}" />
+						</p:column>
+
+						<p:column headerText="Antivirus" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.antivirus}" />
+						</p:column>
+
+						<p:column headerText="Nombre Equipo" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.nombre_equipo}" />
+						</p:column>
+
+						<p:column headerText="Dirección Ip" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.ip}" />
+						</p:column>
+
+						<p:column headerText="Sistema operativo" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText
+								value="#{equipo.sistemaoperativo.sistema_operativo}" />
+						</p:column>
+
+						<p:column headerText="Office" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.paqueteria.office}" />
+						</p:column>
+
+
+						<p:column headerText="Area" style="width:15%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{equipo.area.nombre_area}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{equipoBean.actualarea}"
+										required="true" requiredMessage="Seleccione la area">
+										<f:selectItems value="#{equipoBean.area1}" var="area"
+											itemLabel="#{area.nombre_area}" itemValue="#{area.id_area}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Departamento" style="width:35%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText
+										value="#{equipo.departamento.nombre_departamento}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{equipoBean.actualdepa}"
+										required="true" requiredMessage="Seleccione el departamento">
+										<f:selectItems value="#{equipoBean.depa1}" var="depa"
+											itemLabel="#{depa.nombre_departamento}"
+											itemValue="#{depa.id_departamento}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Personal" style="width:20%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{equipo.personal.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{equipoBean.actualprs}"
+										required="true" requiredMessage="Seleccione el personal"
+										filter="true" filterMatchMode="startsWith" style="width:180px">
+										<f:selectItems value="#{equipoBean.prs1}" var="prs"
+											itemLabel="#{prs.nombre}" itemValue="#{prs.id_personal}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Observaciones" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{equipo.observaciones}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputTextarea value="#{equipo.observaciones}"
+										style="width:96%" label="observaciones" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Estatus" style="display: none;">
+							<f:facet name="output" />
+							<h:outputText value="#{equipo.estatus}" />
+						</p:column>
+
+						<p:column style="width:32px">
+							<p:rowEditor />
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</center>
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,463 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<input type="hidden" id="usuario" name="usuario"
+			value="#{userManagedBean.usuario.id}" />
+		<center>
+
+			<p:megaMenu style="margin-top:20px">
+				<p:menuitem value="Inicio" url="/views/home.xhtml"
+					icon="ui-icon-home" />
+
+				<p:submenu label="Equipo" icon="ui-icon-document">
+					<p:column>
+						<p:submenu label="Equipo">
+							<p:menuitem value="Equipo" url="/views/equipo.xhtml" />
+						</p:submenu>
+						<p:submenu label="Reportes">
+							<p:menuitem value="Reporte1" url="/views/reporte1.xhtml" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<p:submenu label="Traspasos" icon="ui-icon-document">
+					<p:column>
+						<p:submenu label="Traspasos">
+							<p:menuitem value="Movimientos" url="/views/movimientos.xhtml" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<p:submenu label="Catálogos" icon="ui-icon-pencil">
+					<p:column>
+						<p:submenu label="Marca">
+							<p:menuitem value="Fabricante" url="/views/fabricante.xhtml" />
+							<p:menuitem value="Sistema Operativo" url="/views/so.xhtml" />
+							<p:menuitem value="Paquetería" url="/views/paqueteria.xhtml" />
+						</p:submenu>
+						<p:submenu label="Areas">
+							<p:menuitem value="Área" url="/views/area.xhtml" />
+							<p:menuitem value="Departamento" url="/views/departamento.xhtml" />
+						</p:submenu>
+						<p:submenu label="Mantenimiento">
+							<p:menuitem value="Tipo de Mantenimiento"
+								url="/views/tipomantenimiento.xhtml" />
+						</p:submenu>
+						<p:submenu label="Usuarios">
+							<p:menuitem value="Dependencia" url="/views/dependencia.xhtml" />
+							<p:menuitem value="Personal" url="/views/personal.xhtml" />
+							<p:menuitem value="Usuarios" url="/views/usuarios.xhtml" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+				<p:menuitem value="Logout" url="/default.xhtml" icon="ui-icon-close" />
+			</p:megaMenu>
+
+			<p:panel id="panel" header="Bienvenido #{userManagedBean.username}!"
+				heigth="100%">
+				<BR></BR>
+
+				<h:form id="form2">
+					<p:dialog header="Equipo Modificación" widgetVar="equipoDialog"
+						modal="false" showEffect="fade" hideEffect="fade"
+						resizable="false">
+						<p:outputPanel id="equipoDetail" style="text-align:center;">
+							<p:panelGrid columns="2"
+								rendered="#{not empty equipoBean.selectedEquipo}"
+								columnClasses="label,value">
+
+								<h:outputText value="Id:" />
+								<h:outputText value="#{equipoBean.selectedEquipo.id_equipo}" />
+
+								<h:outputText value="Fecha" />
+								<h:outputText value="#{equipoBean.selectedEquipo.fecha}" />
+
+								<h:outputText value="Serie" />
+								<h:inputText value="#{equipoBean.selectedEquipo.no_serie}" />
+								
+								<h:outputText value="Modelo" />
+								<h:inputText value="#{equipoBean.selectedEquipo.modelo}" />
+
+								<h:outputText for="event" value="Fabricante" />
+								<p:inplace id="event16" effectSpeed="fast" event="dblclick">
+								<h:selectOneMenu value="#{equipoBean.selectedEquipo.fabricante.fabricante}"
+										required="true" requiredMessage="Seleccione el fabricante"
+										filter="true" filterMatchMode="startsWith">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.fabs1}" var="fab"
+											itemLabel="#{fab.fabricante}"
+											itemValue="#{fab.id_fabricante}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Monitor" />
+								<p:inplace id="event15" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu value="#{equipoBean.selectedEquipo.monitor.serie}"
+										required="true" requiredMessage="Seleccione el monitor"
+										filter="true" filterMatchMode="startsWith">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.monitors1}" var="mon"
+											itemLabel="#{mon.serie}" itemValue="#{mon.id_monitor}" />
+									</h:selectOneMenu>
+								</p:inplace>
+								
+									<h:outputText value="#{equipo.selectedEquipo.monitor.serie}" />
+								<f:facet name="input">
+									<h:selectOneMenu value="#{equipoBean.actualmon}"
+										required="true" requiredMessage="Seleccione el monitor"
+										filter="true" filterMatchMode="startsWith">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.monitors1}" var="mon"
+											itemLabel="#{mon.serie}" itemValue="#{mon.id_monitor}" />
+									</h:selectOneMenu>
+								</f:facet>
+
+
+								<h:outputText for="event" value="Mouse" />
+								<p:inplace id="event14" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.mouse.serie}"
+										required="true" requiredMessage="Seleccione el mouse">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.mouses1}" var="mou"
+											itemLabel="#{mou.serie}" itemValue="#{mou.id_mouse}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Teclado" />
+								<p:inplace id="event13" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.teclado.serie}"
+										required="true" requiredMessage="Seleccione el teclado">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.teclados1}" var="tec"
+											itemLabel="#{tec.serie}" itemValue="#{tec.id_teclado}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Nobreak" />
+								<p:inplace id="event12" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.nobreak.serie}"
+										required="true" requiredMessage="Seleccione el nobreak">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.nobreaks1}" var="nob"
+											itemLabel="#{nob.serie}" itemValue="#{nob.id_nobreak}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Escáner" />
+								<p:inplace id="event11" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.scanner.serie}"
+										required="true" requiredMessage="Seleccione el escáner">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.escaners1}" var="esca"
+											itemLabel="#{esca.serie}" itemValue="#{esca.id_scanner}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Impresora" />
+								<p:inplace id="event10" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.impresora.serie}"
+										required="true" requiredMessage="Seleccione la impresora">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.impresoras1}" var="imp"
+											itemLabel="#{imp.serie}" itemValue="#{imp.id_impresora}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+
+								<h:outputText for="event" value="Antivirus" />
+								<p:inplace id="event9" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu value="#{equipoBean.selectedEquipo.antivirus}"
+										required="true"
+										requiredMessage="Seleccione si el equipo tiene antivirus">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItem itemLabel="Si" itemValue="Si" />
+										<f:selectItem itemLabel="No" itemValue="No" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText value="Nombre" />
+								<h:inputText value="#{equipoBean.selectedEquipo.nombre_equipo}" />
+
+								<h:outputText value="Ip" />
+								<h:inputText value="#{equipoBean.selectedEquipo.ip}" />
+
+								<h:outputText for="event" value="Sistema Operativo" />
+								<p:inplace id="event8" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.sistemaoperativo.sistema_operativo}"
+										required="true"
+										requiredMessage="Seleccione el sistema operativo">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.sos1}" var="so"
+											itemLabel="#{so.sistema_operativo}" itemValue="#{so.id_so}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Paqueteria" />
+								<p:inplace id="event5" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.paqueteria.office}"
+										required="true" requiredMessage="Seleccione la paqueteria">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.paqs1}" var="paq"
+											itemLabel="#{paq.office}" itemValue="#{paq.id_paqueteria}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" value="Área" />
+								<p:inplace id="event4" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.area.nombre_area}"
+										required="true" requiredMessage="Seleccione la area">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.area1}" var="area"
+											itemLabel="#{area.nombre_area}" itemValue="#{area.id_area}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" label="Departamento"
+									value="Departamento" />
+								<p:inplace id="event3" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.departamento.nombre_departamento}"
+										required="true" requiredMessage="Seleccione el departamento">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.depa1}" var="depa"
+											itemLabel="#{depa.nombre_departamento}"
+											itemValue="#{depa.id_departamento}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText for="event" label="Personal" value="Personal" />
+								<p:inplace id="event2" effectSpeed="fast" event="dblclick">
+									<h:selectOneMenu
+										value="#{equipoBean.selectedEquipo.personal.nombre}"
+										required="true" requiredMessage="Seleccione el personal"
+										style="width:180px">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{equipoBean.prs1}" var="prs"
+											itemLabel="#{prs.nombre}" itemValue="#{prs.id_personal}" />
+									</h:selectOneMenu>
+								</p:inplace>
+
+								<h:outputText value="Observaciones" />
+								<h:inputTextarea
+									value="#{equipoBean.selectedEquipo.observaciones}" />
+
+								<h:outputText for="event" label="Estatus" value="Estatus" />
+								<p:inplace id="event" effectSpeed="fast" event="dblclick">
+									<p:selectOneMenu id="estatus"
+										value="#{equipoBean.selectedEquipo.estatus}" required="true"
+										style="width:96%"
+										requiredMessage="Seleccione si desea desactivar">
+										<f:selectItem itemLabel="Seleccione si desea Desactivar"
+											itemValue="0" />
+										<f:selectItem itemLabel="Desactivar" itemValue="Desactivado" />
+									</p:selectOneMenu>
+								</p:inplace>
+								
+								<h:outputText value="" />
+								<p:commandButton id="btn2" value="Guardar Cambios" update=":form:messages"
+							action="#{equipoBean.actualizar}" />
+								
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:dialog>
+				</h:form>
+
+				<h:form id="form">
+
+					<p:growl id="messages" showDetail="true" />
+
+					<p:dataTable id="tablaequi" var="equipo"
+						value="#{equipoBean.listaequipo}" resizableColumns="true"
+						liveResize="true" selection="#{equipoBean.selectedEquipo}"
+						rowKey="#{equipo.id_equipo}" selectionMode="single"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+						{PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="20" style="margin-bottom:20px">
+
+				<!--	<f:facet name="header">
+							<p:commandButton process="tablaequi" update=":form2:equipoDetail"
+								icon="ui-icon-search" value="Modificar"
+								oncomplete="PF('equipoDialog').show()" />
+						</f:facet>
+				 -->
+						<f:facet name="{Exporters}">
+							<h:commandLink ajax="false">
+								<p:graphicImage url="/images/pdf.png" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="pdf" target="tablaequi"
+									fileName="#{equipoBean.fileName}" pageOnly="false"
+									encoding="ISO-8859-1"
+									preProcessor="#{equipoBean.preProcessPDF}"
+									postProcessor="#{equipoBean.postProcessPDF}" />
+							</h:commandLink>
+
+							<h:commandLink ajax="false">
+								<p:graphicImage value="/images/excel.jpg" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="xls" target="tablaequi"
+									fileName="#{equipoBean.fileName}" pageOnly="false"
+									selectionOnly="false"
+									postProcessor="#{equipoBean.postProcessXLS}" />
+							</h:commandLink>
+
+						</f:facet>
+
+						<f:facet name="header">Reporte General Equipos</f:facet>
+
+						<p:column headerText="Id" style="width:25%">
+							<f:facet name="header" id="id1">Id</f:facet>
+							<h:outputText value="#{equipo.id_equipo}" />
+						</p:column>
+
+						<p:column headerText="Fecha" style="width:25%">
+							<f:facet name="header" id="id2">Fecha</f:facet>
+							<h:outputText value="#{equipo.fecha}">
+								<f:convertDateTime pattern="yyyy-MMM-d a" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Serie" style="width:25%">
+							<f:facet name="header" id="id4">Serie</f:facet>
+							<h:outputText value="#{equipo.no_serie}">
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Modelo" style="width:25%">
+								<f:facet name="output" />
+									<h:outputText value="#{equipo.modelo}">
+									</h:outputText>
+						</p:column>
+
+						<p:column headerText="Nombre" style="width:25%">
+							<f:facet name="header" id="id5">Nombre</f:facet>
+							<h:outputText value="#{equipo.nombre_equipo}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Antivirus" style="width:25%">
+							<f:facet name="header" id="id6">Antivirus</f:facet>
+							<h:outputText value="#{equipo.antivirus}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Ip" style="width:25%">
+							<f:facet name="header" id="id7">Ip</f:facet>
+							<h:outputText value="#{equipo.ip}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Monitor" style="width:25%">
+							<f:facet name="header" id="id8">Monitor</f:facet>
+							<h:outputText value="#{equipo.monitor.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Mouse" style="width:25%">
+							<f:facet name="header" id="id9">Mouse</f:facet>
+							<h:outputText value="#{equipo.mouse.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="NoBreak" style="width:25%">
+							<f:facet name="header" id="id10">No Break</f:facet>
+							<h:outputText value="#{equipo.nobreak.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Escáner" style="width:25%">
+							<f:facet name="header" id="id11">Escáner</f:facet>
+							<h:outputText value="#{equipo.scanner.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Teclado" style="width:25%">
+							<f:facet name="header" id="id12">Teclado</f:facet>
+							<h:outputText value="#{equipo.teclado.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Impresora" style="width:25%">
+							<f:facet name="header" id="id13">Impresora</f:facet>
+							<h:outputText value="#{equipo.impresora.serie}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="SistemaOperativo" style="width:25%">
+							<f:facet name="header" id="id14">Sistema Operativo</f:facet>
+							<h:outputText
+								value="#{equipo.sistemaoperativo.sistema_operativo}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Fabricante" style="width:25%">
+							<f:facet name="header" id="id15">Fabricante</f:facet>
+							<h:outputText value="#{equipo.fabricante.fabricante}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Paqueteria" style="width:25%">
+							<f:facet name="header" id="id16">Paqueteria</f:facet>
+							<h:outputText value="#{equipo.paqueteria.office}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Area" style="width:25%">
+							<f:facet name="header" id="id17">Area</f:facet>
+							<h:outputText value="#{equipo.area.nombre_area}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Departamento" style="width:25%">
+							<f:facet name="header" id="id18">Departamento</f:facet>
+							<h:outputText value="#{equipo.departamento.nombre_departamento}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Personal" style="width:25%">
+							<f:facet name="header" id="id19">Personal</f:facet>
+							<h:outputText value="#{equipo.personal.nombre}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Observaciones" style="width:25%">
+							<f:facet name="header" id="id20">Observaciones</f:facet>
+							<h:outputText value="#{equipo.observaciones}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Estatus" style="width:25%">
+							<f:facet name="header" id="id21">Estatus</f:facet>
+							<h:outputText value="#{equipo.estatus}">
+							</h:outputText>
+						</p:column>
+
+						<p:column style="width:32px;text-align: center">
+							<p:commandButton update=":form2:equipoDetail"
+								oncomplete="PF('equipoDialog').show()" icon="ui-icon-pencil"
+								title="View">
+								<f:setPropertyActionListener value="#{equipo}"
+									target="#{equipoBean.selectedEquipo}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</center>
+
+	</ui:define>
+</ui:composition>
+

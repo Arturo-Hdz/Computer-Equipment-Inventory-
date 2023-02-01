@@ -1,0 +1,243 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<title>Reporte Mantenimiento Filtrado | INVISIS</title>
+		<center>
+			<input type="hidden" id="usuario" name="usuario"
+				value="#{userManagedBean.usuario.id}" />
+
+			<h:form id="form3">
+					<p:megaMenu style="margin-top:20px">
+					<p:menuitem value="Inicio" url="/views/home.jsf"
+						icon="ui-icon-home" />
+
+					<p:submenu label="Equipo" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo">
+								<p:menuitem value="Equipo"
+									actionListener="#{equipoBean.llenaEquipo}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo3}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo1}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo2}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo4}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo5}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo6}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Traspasos" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Traspasos">
+								<p:menuitem value="Movimientos Equipos"
+									actionListener="#{equipoBean.llenaEquipo7}"
+									update=":tabla:tablaequipos" ajax="false" />
+								<p:menuitem value="Historial de Movimientos"
+									actionListener="#{movimientosBean.llenaMovimientos}"
+									update=":tabla:tablamov" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Mantenimiento" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo Mantenimiento">
+								<p:menuitem value="Mantenimiento"
+									actionListener="#{paqueteriaBean.llenaTm}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Reporte Equipo Mantenimiento Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm3}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm1}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm2}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Mantenimiento Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm6}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm4}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm5}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Clasificación" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Clasificación">
+								<p:menuitem value="Monitor"
+									actionListener="#{mouseBean.llenaMon}" update=":tabla:tablamon"
+									ajax="false" />
+								<p:menuitem value="Mouse"
+									actionListener="#{mouseBean.llenaMouse}"
+									update=":tabla:tablamou" ajax="false" />
+								<p:menuitem value="Teclado"
+									actionListener="#{impresoraBean.llenaTecla}"
+									update=":tabla:tablatecla" ajax="false" />
+								<p:menuitem value="No break"
+									actionListener="#{escanerBean.llenaNob}"
+									update=":tabla:tablanob" ajax="false" />
+								<p:menuitem value="Escáner"
+									actionListener="#{escanerBean.llenaEsca}"
+									update=":tabla:tablaesca" ajax="false" />
+								<p:menuitem value="Impresora"
+									actionListener="#{impresoraBean.llenaImpre}"
+									update=":tabla:tablaimpre" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Catálogos" icon="ui-icon-pencil">
+						<p:column>
+							<p:submenu label="Marca">
+								<p:menuitem value="Fabricante"
+									actionListener="#{userManagedBean.llenafabricante}"
+									update=":tabla:tablafabricantes" ajax="false" />
+								<p:menuitem value="Sistema Operativo"
+									actionListener="#{soBean.llenaSo}" update=":tabla:tablaso"
+									ajax="false" />
+								<p:menuitem value="Paquetería"
+									actionListener="#{paqueteriaBean.llenaPq}"
+									update=":tabla:tablapaq" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Areas">
+								<p:menuitem value="Área"
+									actionListener="#{movimientosBean.llenaArea}"
+									update=":tabla:tablaareas" ajax="false" />
+								<p:menuitem value="Departamento"
+									actionListener="#{movimientosBean.llenaDepa}"
+									update=":tabla:tabladepas" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Usuarios">
+								<p:menuitem value="Personal"
+									actionListener="#{personalBean.llenaPersonal}"
+									update=":tabla:tablaperson" ajax="false" />
+								<p:menuitem value="Usuarios"
+									actionListener="#{userManagedBean.llenausuario}"
+									update=":tabla:tablausuarios" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+					<p:menuitem value="Logout" url="/default.jsf"
+						icon="ui-icon-close" />
+
+				</p:megaMenu>
+			</h:form>
+
+			<p:panel id="panel" header="Bienvenido #{userManagedBean.username}!"
+				heigth="100%">
+				<BR></BR>
+
+				<h:form id="form">
+
+					<p:growl id="messages" showDetail="true" />
+
+					<p:commandButton id="btn" value="Actualizar"
+						update=":tabla:tablatm" ajax="false"
+						action="#{paqueteriaBean.llenaTm2}" />
+
+					<br />
+
+					<p:dataTable id="tablatm" var="paqueteria"
+						value="#{paqueteriaBean.listaTm}" widgetVar="tmsTable"
+						emptyMessage="No se encuentran equipo en mantenimiento"
+						filteredValue="#{paqueteriaBean.filteredTms}"
+						style="margin-bottom:20px">
+
+						<p:column filterBy="#{paqueteria.equipo.no_serie}"
+							headerText="Serie" footerText="serie" filterMatchMode="contains">
+							<h:outputText value="#{paqueteria.equipo.no_serie}" />
+						</p:column>
+
+						<p:column filterBy="#{paqueteria.tipo_mantenimiento}"
+							headerText="Tipo Mantenimiento" footerText="Mantenimiento"
+							filterMatchMode="equals">
+							<f:facet name="filter">
+								<p:selectOneButton onchange="PF('tmsTable').filter()">
+									<f:selectItem itemLabel="Ambos" itemValue="#{null}" />
+									<f:selectItem itemLabel="Preventivo" itemValue="Preventivo" />
+									<f:selectItem itemLabel="Correctivo" itemValue="Correctivo" />
+									<p:ajax process="@this" update=":form" />
+								</p:selectOneButton>
+							</f:facet>
+							<h:outputText value="#{paqueteria.tipo_mantenimiento}" />
+						</p:column>
+
+						<p:column filterBy="#{paqueteria.reparacion}"
+							headerText="Reparacion" footerText="reparacion"
+							filterMatchMode="equals">
+							<f:facet name="filter">
+								<p:selectOneButton onchange="PF('tmsTable').filter()">
+									<f:selectItem itemLabel="Ambos" itemValue="#{null}" />
+									<f:selectItem itemLabel="En Proceso" itemValue="En Proceso" />
+									<f:selectItem itemLabel="Terminado" itemValue="Terminado" />
+									<p:ajax process="@this" update=":form" />
+								</p:selectOneButton>
+							</f:facet>
+							<h:outputText value="#{paqueteria.reparacion}" />
+						</p:column>
+
+					</p:dataTable>
+
+					<p:panel id="exportar" header="Exportar Pdf"
+						style="margin-bottom:10px">
+
+						<h:commandLink ajax="false">
+							<p:graphicImage url="/images/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="tablatm"
+								fileName="#{paqueteriaBean.fileName}" pageOnly="true"
+								encoding="ISO-8859-1"
+								preProcessor="#{paqueteriaBean.preProcessPDF}"
+								postProcessor="#{paqueteriaBean.postProcessPDF}" />
+						</h:commandLink>
+
+						<h:commandLink ajax="false">
+							<p:graphicImage value="/images/excel.jpg" width="30" />
+							<p:dataExporter type="xls" target="tablatm"
+								fileName="#{paqueteriaBean.fileName}" pageOnly="true"
+								selectionOnly="false"
+								postProcessor="#{paqueteriaBean.postProcessXLS}" />
+						</h:commandLink>
+
+					</p:panel>
+				</h:form>
+			</p:panel>
+		</center>
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,315 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+
+		<input type="hidden" id="usuario" name="usuario"
+			value="#{userManagedBean.usuario.id}" />
+
+		<title>Personal | INVISIS</title>
+		<center>
+
+			<h:form id="form3">
+					<p:megaMenu style="margin-top:20px">
+					<p:menuitem value="Inicio" url="/views/home.jsf"
+						icon="ui-icon-home" />
+
+					<p:submenu label="Equipo" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo">
+								<p:menuitem value="Equipo"
+									actionListener="#{equipoBean.llenaEquipo}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo3}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo1}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo2}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo4}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo5}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo6}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Traspasos" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Traspasos">
+								<p:menuitem value="Movimientos Equipos"
+									actionListener="#{equipoBean.llenaEquipo7}"
+									update=":tabla:tablaequipos" ajax="false" />
+								<p:menuitem value="Historial de Movimientos"
+									actionListener="#{movimientosBean.llenaMovimientos}"
+									update=":tabla:tablamov" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Mantenimiento" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo Mantenimiento">
+								<p:menuitem value="Mantenimiento"
+									actionListener="#{paqueteriaBean.llenaTm}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Reporte Equipo Mantenimiento Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm3}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm1}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm2}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Mantenimiento Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm6}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm4}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm5}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Clasificación" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Clasificación">
+								<p:menuitem value="Monitor"
+									actionListener="#{mouseBean.llenaMon}" update=":tabla:tablamon"
+									ajax="false" />
+								<p:menuitem value="Mouse"
+									actionListener="#{mouseBean.llenaMouse}"
+									update=":tabla:tablamou" ajax="false" />
+								<p:menuitem value="Teclado"
+									actionListener="#{impresoraBean.llenaTecla}"
+									update=":tabla:tablatecla" ajax="false" />
+								<p:menuitem value="No break"
+									actionListener="#{escanerBean.llenaNob}"
+									update=":tabla:tablanob" ajax="false" />
+								<p:menuitem value="Escáner"
+									actionListener="#{escanerBean.llenaEsca}"
+									update=":tabla:tablaesca" ajax="false" />
+								<p:menuitem value="Impresora"
+									actionListener="#{impresoraBean.llenaImpre}"
+									update=":tabla:tablaimpre" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Catálogos" icon="ui-icon-pencil">
+						<p:column>
+							<p:submenu label="Marca">
+								<p:menuitem value="Fabricante"
+									actionListener="#{userManagedBean.llenafabricante}"
+									update=":tabla:tablafabricantes" ajax="false" />
+								<p:menuitem value="Sistema Operativo"
+									actionListener="#{soBean.llenaSo}" update=":tabla:tablaso"
+									ajax="false" />
+								<p:menuitem value="Paquetería"
+									actionListener="#{paqueteriaBean.llenaPq}"
+									update=":tabla:tablapaq" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Areas">
+								<p:menuitem value="Área"
+									actionListener="#{movimientosBean.llenaArea}"
+									update=":tabla:tablaareas" ajax="false" />
+								<p:menuitem value="Departamento"
+									actionListener="#{movimientosBean.llenaDepa}"
+									update=":tabla:tabladepas" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Usuarios">
+								<p:menuitem value="Personal"
+									actionListener="#{personalBean.llenaPersonal}"
+									update=":tabla:tablaperson" ajax="false" />
+								<p:menuitem value="Usuarios"
+									actionListener="#{userManagedBean.llenausuario}"
+									update=":tabla:tablausuarios" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+					<p:menuitem value="Logout" url="/default.jsf"
+						icon="ui-icon-close" />
+
+				</p:megaMenu>
+			</h:form>
+
+			<p:panel id="panel" header="Bienvenido #{userManagedBean.username}!"
+				heigth="100%">
+				<BR></BR>
+
+				<p:dialog header="Nuevo Personal" widgetVar="dlg" resizable="false">
+					<h:form id="form2">
+
+						<p:messages id="msgs" showDetail="false" />
+
+						<h:panelGrid id="panel" header="Nuevo Personal" columns="2"
+							style="margin-bottom:10px">
+							<h:outputLabel for="nombre" value="Nombre:" />
+							<p:inputText id="nombre" value="#{personalBean.nombre}"
+								required="true" requiredMessage="Se Requiere el Nombre."
+								label="nombre">
+								<f:validateLength minimum="2" />
+								<p:message for="nombre" />
+							</p:inputText>
+
+							<h:outputLabel for="apepat" value="Apellido Paterno:" />
+							<p:inputText id="apepat" value="#{personalBean.ap_paterno}"
+								required="true"
+								requiredMessage="Se Requiere el apellido paterno."
+								label="apepat">
+								<f:validateLength minimum="2" />
+								<p:message for="apepat" />
+							</p:inputText>
+
+							<h:outputLabel for="apemat" value="Apellido Materno:" />
+							<p:inputText id="apemat" value="#{personalBean.ap_materno}"
+								required="true"
+								requiredMessage="Se Requiere el Apellido Materno."
+								label="apemat">
+								<f:validateLength minimum="2" />
+								<p:message for="apemat" />
+							</p:inputText>
+
+						</h:panelGrid>
+
+						<p:commandButton id="btn" value="Añadir" update=":form2:msgs"
+							action="#{personalBean.altaPersonal()}" />
+						<p:commandButton value="Cancelar" update="panel" process="@this"
+							actionListener="#{personalBean.resetPersonal}"
+							oncomplete="PF('dlg').hide();" />
+
+					</h:form>
+				</p:dialog>
+
+				<h:form id="form">
+
+					<p:growl id="messages" showDetail="true" />
+
+
+					<p:commandButton id="showDialogButton" type="button"
+						value="Registrar Nuevo Personal" onclick="PF('dlg').show()" />
+
+					<p:commandButton id="btn" value="Actualizar"
+						update=":tabla:tablaperson" ajax="false"
+						action="#{personalBean.llenaPersonal}" />
+
+					<p:contextMenu for="tablaperson" widgetVar="cMenu">
+						<p:menuitem value="Borrar Personal" update="tablaperson"
+							icon="ui-icon-close"
+							actionListener="#{personalBean.borrarPersonal()}" />
+						<p:menuitem value="Oculta Menú" icon="ui-icon-extlink"
+							onclick="PF('cMenu').hide()" />
+					</p:contextMenu>
+
+					<p:dataTable id="tablaperson" var="personal"
+						value="#{personalBean.listaPersonal}" editable="true"
+						editMode="cell" widgetVar="personTable" selectionMode="single"
+						rowKey="#{personal.id_personal}"
+						selection="#{personalBean.selectedPersonal}" rows="20"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,15,20">
+
+						<f:facet name="header">Reporte Personal</f:facet>
+
+						<p:ajax event="cellEdit"
+							listener="#{personalBean.onCellEditPersonal}"
+							update=":form:messages" />
+
+						<p:column headerText="Id" style="width:25%">
+							<f:facet name="header" id="id">Id</f:facet>
+							<h:outputText value="#{personal.id_personal}" />
+						</p:column>
+
+						<p:column filterBy="#{personal.nombre}" headerText="Nombre"
+							footerText="Nombre" filterMatchMode="contains" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{personal.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{personal.nombre}" style="width:96%"
+										label="nombre" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column filterBy="#{personal.ap_paterno}"
+							headerText="Apellido Paterno" footerText="Ap. Paterno"
+							filterMatchMode="contains" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{personal.ap_paterno}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{personal.ap_paterno}" style="width:96%"
+										label="ap_paterno" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Apellido Materno" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{personal.ap_materno}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{personal.ap_materno}" style="width:96%"
+										label="ap_materno" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Estatus" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="Activo" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="estatus" value="#{personalBean.estatus}"
+										required="true" style="width:96%"
+										requiredMessage="Seleccione si desea desactivar">
+										<f:selectItem itemLabel="Seleccione si desea Desactivar"/>
+										<f:selectItem itemLabel="Desactivar" itemValue="0" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</center>
+
+	</ui:define>
+</ui:composition>
+

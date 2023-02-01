@@ -1,0 +1,329 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<input type="hidden" id="usuario" name="usuario"
+			value="#{userManagedBean.usuario.id}" />
+
+		<title>No break | INVISIS</title>
+		<center>
+
+			<script>
+				function conMayusculas(field) {
+					field.value = field.value.toUpperCase()
+				}
+			</script>
+
+			<h:form id="form3">
+					<p:megaMenu style="margin-top:20px">
+					<p:menuitem value="Inicio" url="/views/home.jsf"
+						icon="ui-icon-home" />
+
+					<p:submenu label="Equipo" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo">
+								<p:menuitem value="Equipo"
+									actionListener="#{equipoBean.llenaEquipo}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo3}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo1}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo2}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{equipoBean.llenaEquipo4}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{equipoBean.llenaEquipo5}"
+									update=":tabla:tablaequi" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{equipoBean.llenaEquipo6}"
+									update=":tabla:tablaequi" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Traspasos" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Traspasos">
+								<p:menuitem value="Movimientos Equipos"
+									actionListener="#{equipoBean.llenaEquipo7}"
+									update=":tabla:tablaequipos" ajax="false" />
+								<p:menuitem value="Historial de Movimientos"
+									actionListener="#{movimientosBean.llenaMovimientos}"
+									update=":tabla:tablamov" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Mantenimiento" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Equipo Mantenimiento">
+								<p:menuitem value="Mantenimiento"
+									actionListener="#{paqueteriaBean.llenaTm}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Reporte Equipo Mantenimiento Activados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm3}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm1}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm2}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Reporte Equipo Mantenimiento Desactivados">
+								<p:menuitem value="Reporte General"
+									actionListener="#{paqueteriaBean.llenaTm6}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Individual"
+									actionListener="#{paqueteriaBean.llenaTm4}"
+									update=":tabla:tablatm" ajax="false" />
+								<p:menuitem value="Reporte Filtrado"
+									actionListener="#{paqueteriaBean.llenaTm5}"
+									update=":tabla:tablatm" ajax="false" />
+							</p:submenu>
+
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Clasificación" icon="ui-icon-document">
+						<p:column>
+							<p:submenu label="Clasificación">
+								<p:menuitem value="Monitor"
+									actionListener="#{mouseBean.llenaMon}" update=":tabla:tablamon"
+									ajax="false" />
+								<p:menuitem value="Mouse"
+									actionListener="#{mouseBean.llenaMouse}"
+									update=":tabla:tablamou" ajax="false" />
+								<p:menuitem value="Teclado"
+									actionListener="#{impresoraBean.llenaTecla}"
+									update=":tabla:tablatecla" ajax="false" />
+								<p:menuitem value="No break"
+									actionListener="#{escanerBean.llenaNob}"
+									update=":tabla:tablanob" ajax="false" />
+								<p:menuitem value="Escáner"
+									actionListener="#{escanerBean.llenaEsca}"
+									update=":tabla:tablaesca" ajax="false" />
+								<p:menuitem value="Impresora"
+									actionListener="#{impresoraBean.llenaImpre}"
+									update=":tabla:tablaimpre" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+
+					<p:submenu label="Catálogos" icon="ui-icon-pencil">
+						<p:column>
+							<p:submenu label="Marca">
+								<p:menuitem value="Fabricante"
+									actionListener="#{userManagedBean.llenafabricante}"
+									update=":tabla:tablafabricantes" ajax="false" />
+								<p:menuitem value="Sistema Operativo"
+									actionListener="#{soBean.llenaSo}" update=":tabla:tablaso"
+									ajax="false" />
+								<p:menuitem value="Paquetería"
+									actionListener="#{paqueteriaBean.llenaPq}"
+									update=":tabla:tablapaq" ajax="false" />
+							</p:submenu>
+							<p:submenu label="Areas">
+								<p:menuitem value="Área"
+									actionListener="#{movimientosBean.llenaArea}"
+									update=":tabla:tablaareas" ajax="false" />
+								<p:menuitem value="Departamento"
+									actionListener="#{movimientosBean.llenaDepa}"
+									update=":tabla:tabladepas" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="Usuarios">
+								<p:menuitem value="Personal"
+									actionListener="#{personalBean.llenaPersonal}"
+									update=":tabla:tablaperson" ajax="false" />
+								<p:menuitem value="Usuarios"
+									actionListener="#{userManagedBean.llenausuario}"
+									update=":tabla:tablausuarios" ajax="false" />
+							</p:submenu>
+						</p:column>
+					</p:submenu>
+					<p:menuitem value="Logout" url="/default.jsf"
+						icon="ui-icon-close" />
+
+				</p:megaMenu>
+			</h:form>
+
+			<p:panel id="panel" header="Bienvenido #{userManagedBean.username}!"
+				heigth="100%">
+				<BR></BR>
+
+				<p:dialog header="Nuevo No-break" widgetVar="dlg" resizable="false">
+					<h:form id="form2">
+
+						<p:messages id="msgs" showDetail="false" />
+
+						<h:panelGrid id="panel" header="Nuevo No-break" columns="2"
+							style="margin-bottom:10px">
+							<h:outputLabel for="serienob" value="Serie:" />
+							<p:inputText id="serienob" onblur="conMayusculas(this)"
+								value="#{escanerBean.serienob}" required="true"
+								requiredMessage="Se Requiere no. de serie del no break."
+								label="serienob">
+								<f:validateLength minimum="2" />
+								<p:message for="serienob" />
+							</p:inputText>
+
+							<h:outputLabel for="modelonob" value="Modelo:" />
+							<p:inputText id="modelonob" onblur="conMayusculas(this)"
+								value="#{escanerBean.modelonob}" required="true"
+								requiredMessage="Se Requiere el modelo del no-break."
+								label="modelonob">
+								<f:validateLength minimum="2" />
+								<p:message for="modelonob" />
+							</p:inputText>
+
+							<h:outputLabel for="fab" value="Fabricante:" />
+							<p:selectOneMenu id="fab" value="#{escanerBean.nuevofab3}"
+								required="true" requiredMessage="Seleccione el fabricante"
+								filter="true" filterMatchMode="startsWith" style="width:170px">
+								<f:selectItem itemLabel="Seleccione" itemValue="0" />
+								<f:selectItems value="#{escanerBean.fabs2}" var="fab"
+									itemLabel="#{fab.fabricante}" itemValue="#{fab.id_fabricante}" />
+							</p:selectOneMenu>
+
+						</h:panelGrid>
+
+						<p:commandButton id="btn" value="Añadir" update=":form2:msgs"
+							action="#{escanerBean.altaNob()}" />
+						<p:commandButton value="Cancelar" update="panel" process="@this"
+							actionListener="#{escanerBean.resetNob}"
+							oncomplete="PF('dlg').hide();" />
+
+					</h:form>
+				</p:dialog>
+
+				<h:form id="form">
+
+					<p:growl id="messages" showDetail="true" />
+
+
+					<p:commandButton id="showDialogButton" type="button"
+						value="Registrar Nuevo No-Break" onclick="PF('dlg').show()" />
+
+					<p:commandButton id="btn" value="Actualizar"
+						update=":tabla:tablanob" ajax="false"
+						action="#{escanerBean.llenaNob}" />
+
+					<p:contextMenu for="tablanob" widgetVar="cMenu">
+						<p:menuitem value="Borrar No break" update="tablanob"
+							icon="ui-icon-close" actionListener="#{escanerBean.borrarNob()}" />
+						<p:menuitem value="Oculta Menú" icon="ui-icon-extlink"
+							onclick="PF('cMenu').hide()" />
+					</p:contextMenu>
+
+					<p:dataTable id="tablanob" var="nob"
+						value="#{escanerBean.listaNobreaks}" editable="true"
+						editMode="cell" widgetVar="Tablenob" selectionMode="single"
+						rowKey="#{nob.id_nobreak}"
+						selection="#{escanerBean.selectedNobreak}" rows="20"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+						{RowsPerPageDropdown} {Exporters}"
+						rowsPerPageTemplate="10,15,20">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink ajax="false">
+								<p:graphicImage value="/images/pdf.png" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="pdf" target="tablanob"
+									fileName="#{escanerBean.fileName1}" pageOnly="false"
+									selectionOnly="false"
+									preProcessor="#{escanerBean.preProcessPDF1}"
+									postProcessor="#{escanerBean.postProcessPDF1}" />
+							</h:commandLink>
+
+							<h:commandLink ajax="false">
+								<p:graphicImage value="/images/excel.jpg" width="30"
+									style="float:right;width:30px;height:29px" />
+								<p:dataExporter type="xls" target="tablanob"
+									fileName="#{escanerBean.fileName1}" pageOnly="false"
+									selectionOnly="false"
+									postProcessor="#{escanerBean.postProcessXLS1}" />
+							</h:commandLink>
+
+						</f:facet>
+
+						<f:facet name="header">Reporte No break</f:facet>
+
+						<p:ajax event="cellEdit" listener="#{escanerBean.onCellEditNob}"
+							update=":form:messages" />
+
+						<p:column headerText="Id" style="width:25%">
+							<f:facet name="header" id="id">Id</f:facet>
+							<h:outputText value="#{nob.id_nobreak}" />
+						</p:column>
+
+						<p:column filterBy="#{nob.serie}" headerText="No. Serie"
+							footerText="No. Serie" filterMatchMode="contains"
+							style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{nob.serie}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{nob.serie}" onblur="conMayusculas(this)"
+										style="width:96%" label="nob" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Modelo" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{nob.modelo}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{nob.modelo}" onblur="conMayusculas(this)"
+										style="width:96%" label="nob" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Fabricante" style="width:25%">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{nob.fabricante.fabricante}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{escanerBean.actualfab3}"
+										required="true" requiredMessage="Seleccione el fabricante">
+										<f:selectItem itemLabel="Seleccione" itemValue="0" />
+										<f:selectItems value="#{escanerBean.fabs1}" var="fab"
+											itemLabel="#{fab.fabricante}"
+											itemValue="#{fab.id_fabricante}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</center>
+
+	</ui:define>
+</ui:composition>
+

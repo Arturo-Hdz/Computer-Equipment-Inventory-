@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link type="text/css" rel="stylesheet" href="themes/bluesky/skin.css" />
+
+	<style type="text/css">
+h2 {
+	font-size: 20px;
+	color: gray;
+	font: bold;
+}
+</style>
+
+</h:head>
+<h:body>
+	<title>Login | INVISIS</title>
+	<center>
+
+		<br />
+		<div style="text-align: center">
+			<p:graphicImage value="/images/cmtlogin.png" width="300" height="70" />
+		</div>
+
+		<p:panel header="Login | INVISIS" style="width: 350;">
+			<h:form>
+				<h2>Bienvenidos Sistema 'INVISIS'</h2>
+				<h:panelGrid columns="2" cellpadding="2">
+					<h:outputLabel for="#{userManagedBean.username}" value="Usuario" />
+					<h:inputText value="#{userManagedBean.username}" label="Usuario"></h:inputText>
+					<h:outputLabel for="#{userManagedBean.password}" value="Contraseña" />
+					<h:inputSecret value="#{userManagedBean.password}"></h:inputSecret>
+					<h:commandButton type="submit" value="Entrar"
+						action="#{userManagedBean.login}"></h:commandButton>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+		<div>
+			<h:messages></h:messages>
+		</div>
+	</center>
+</h:body>
+</html>

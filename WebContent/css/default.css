@@ -1,0 +1,8 @@
+.ui-widget, .ui-widget .ui-widget {
+    font-size: 90%;
+    border-collapse: none;
+}
+.ui-panelgrid td{
+	border-style: none;
+	border-collapse: none;
+}
